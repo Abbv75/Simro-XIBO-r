@@ -37,7 +37,8 @@ const PageContentProduitRegion: React.FC<{
     produit: string;
     region: string;
     data: MarcheCollectes[]; // La donnée reçue est un tableau de MarcheCollectes
-}> = ({ produit, region, data }) => {
+    part?: number
+}> = ({ produit, region, data, part }) => {
     const { apiData } = useContext(PageLooperContext);
 
     // Utiliser la fonction utilitaire pour traiter les données et obtenir les informations nécessaires
@@ -110,7 +111,13 @@ const PageContentProduitRegion: React.FC<{
                 <Typography
                     fontWeight={700}
                     textColor={red[900]}
-                >{region}</Typography>
+                >{region}. </Typography>
+
+                <Typography
+                    fontWeight={700}
+                >
+                    {part && `Partie ${part} `}
+                </Typography>
             </Typography>
 
             <Grid container spacing={5} height={'100%'} flex={1} >

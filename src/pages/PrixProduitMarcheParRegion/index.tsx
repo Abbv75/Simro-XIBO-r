@@ -41,25 +41,54 @@ const PrixProduitMarcheParRegion: React.FC<{ produit: string }> = memo(({ produi
             // Créer toutes les pages dynamiques en passant les données regroupées
             const newPages = regions.map((region) => {
                 const dataParRegion = collectesParMarche.filter((p) => p.collectes[0].region === region);
-                return {
-                    id: `prix-${produit}-${region}`,
+
+                // console.log('dataParRegion : ', dataParRegion);
+
+                const res = [];
+
+                // save a page in every 3 lines
+                for (let i = 0; i < dataParRegion.length; i += 3) {
+                    res.push(dataParRegion.slice(i, i + 3));
+                }
+
+                return res.map((dataChunk, index) => ({
+                    id: `prix-${produit}-${region}-part${index + 1}`,
                     component: (
                         <PageContentProduitRegion
                             produit={produit}
                             region={region}
-                            data={dataParRegion}
+                            data={dataChunk}
+                            part={res.length > 1 ? index + 1 : undefined}
                         />
                     ),
                     duration: 15000,
-                };
+                }));
+
+                // return {
+                //     id: `prix-${produit}-${region}`,
+                //     component: (
+                //         <PageContentProduitRegion
+                //             produit={produit}
+                //             region={region}
+                //             data={dataParRegion}
+                //         />
+                //     ),
+                //     duration: 15000,
+                // };
             });
 
             // Mettre à jour les pages en retirant la page de préchargement
+            // setPages((prev: PAGE_T[]) => {
+            //     const filtered = prev.filter(
+            //         (p) => !(p.id === `PrixProduitMarcheParRegion ${produit}`)
+            //     );
+            //     return [...filtered, ...newPages];
+            // });
             setPages((prev: PAGE_T[]) => {
                 const filtered = prev.filter(
                     (p) => !(p.id === `PrixProduitMarcheParRegion ${produit}`)
                 );
-                return [...filtered, ...newPages];
+                return [...filtered, ...newPages.flat()];
             });
         };
 
