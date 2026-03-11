@@ -74,7 +74,7 @@ const PrixMoyenProduitParRegion: React.FC<{ produit: string }> = ({ produit }) =
     }
 
     return (
-        <Stack sx={{ gap: 3, p: 3, }}>
+        <Stack sx={{ gap: 2, p: 6, }}>
             <Typography
                 level="h4"
                 fontSize={"2vw"}
@@ -133,7 +133,7 @@ const PrixMoyenProduitParRegion: React.FC<{ produit: string }> = ({ produit }) =
 
                     <Stack
                         component={'ul'}
-                        mt={2}
+                        mt={3}
                         fontSize={'0.9vw'}
                         gap={1}
                     >

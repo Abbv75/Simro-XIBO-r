@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/joy";
+import { Box, colors, Stack, Typography } from "@mui/joy";
 import { IMAGES } from "../../constant";
 
 const Header: React.FC = () => {
@@ -20,23 +20,23 @@ const Header: React.FC = () => {
                 component="img"
                 src={IMAGES.logo}
                 alt="Logo SIMRO Cameroun"
-                sx={{ height: '3vw', width: "auto" }}
+                sx={{ height: '5vw', width: "auto" }}
             />
 
             {/* Titre du projet */}
             <Stack spacing={0} sx={{ textAlign: "center" }}>
-                <Typography level="h4" fontWeight="lg" fontSize={'1.2vw'}>
-                    SIMRO Cameroun
-                </Typography>
-                <Typography level="body-md" fontWeight="md" fontSize={'1vw'}>
-                    Système d'Information sur les Marchés du Riz et de l'Oignon
+                {/* <Typography level="h4" fontWeight="lg" fontSize={'1.2vw'}>
+                  
+                </Typography> */}
+                <Typography level="body-md" fontWeight="md" fontSize={'1.5vw'}>
+                    Système d'Information sur les Marchés du Riz et de l'Oignon <span style={{ fontWeight: "bold", color:"#1b5e20" }}> (SIMRO Cameroun)</span>
                 </Typography>
             </Stack>
 
             {/* Logos bailleurs / partenaires */}
             <Stack direction="row" spacing={2}>
-                <Box component="img" src={IMAGES.logo_padfa} alt="Bailleur 1" sx={{ height: '3vw', width: "auto" }} />
-                {/* <Box component="img" src="/assets/bailleur2.png" alt="Bailleur 2" sx={{ height: 50, width: "auto" }} /> */}
+                <Box component="img" src={IMAGES.logo_padfa} alt="Bailleur 1" sx={{ height: '5vw', width: "auto" }} />
+                <Box component="img" src={IMAGES.partenaire7} alt="Bailleur 2" sx={{ height: '5vw', width: "auto" }} />
                 {/* Ajouter d'autres bailleurs si nécessaire */}
             </Stack>
         </Stack>

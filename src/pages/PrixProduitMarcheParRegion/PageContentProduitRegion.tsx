@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { Typography, Grid, Stack, Slider, Divider } from "@mui/joy";
+import { Typography, Grid, Stack, Slider, Divider, colors } from "@mui/joy";
 import { GET_ALL_VALIDATION_T } from "../../types";
 import TableCustom from "../../components/TableCustome";
 import {
@@ -80,21 +80,34 @@ const PageContentProduitRegion: React.FC<{
             values: processedData.map((p) => (p.nbrCollectePrecedente !== null ? p.nbrCollectePrecedente.toString() : "-")),
         },
         'gap', // Ajout d'une ligne de séparation après les données précédentes
-        {
-            label: "Evolution %",
-            values: processedData.map((p) => {
-                if (p.evolution === null) return "-";
-                const arrow = p.evolution > 0 ? "⬆️" : p.evolution < 0 ? "⬇️" : "";
-                return `${arrow} ${Math.abs(p.evolution).toFixed(2)}%`;
-            }),
-        },
+      {
+  label: "Evolution %",
+  values: processedData.map((p) => {
+    if (p.evolution === null) return "-";
+
+    const arrow =
+      p.evolution > 0 ? "⬆️" :
+      p.evolution < 0 ? "⬇️" : "";
+
+    const color =
+      p.evolution > 0 ? red[500] :
+      p.evolution < 0 ? green[500] :
+      grey[500];
+
+    return (
+      <span style={{ color }}>
+        {arrow} {Math.abs(p.evolution).toFixed(2)}%
+      </span>
+    );
+  }),
+}
     ];
 
     const codeProduit = useMemo(() => (apiData.find((p) => p.produit === produit)?.codeProduit), [apiData, produit])
 
 
     return (
-        <Stack sx={{ gap: 3, p: 3, }} height={'100%'}>
+        <Stack sx={{ gap: 3, p: 4, }} height={'100%'}>
             <Typography
                 level="h4"
                 fontSize={"2vw"}
@@ -120,7 +133,7 @@ const PageContentProduitRegion: React.FC<{
                 </Typography>
             </Typography>
 
-            <Grid container spacing={5} height={'100%'} flex={1} >
+            <Grid container spacing={2} height={'100%'} flex={1} >
                 <Grid xs={12} md={9}>
                     <TableCustom
                         columns={[
@@ -168,7 +181,7 @@ const PageContentProduitRegion: React.FC<{
 
                         <Stack
                             component="ul"
-                            mt={2}
+                            mt={1}
                             fontSize="0.9vw"
                             gap={1}
                         >
@@ -187,18 +200,18 @@ const PageContentProduitRegion: React.FC<{
                                 if (p.prixActuel === null || p.prixPrecedent === null) return null;
 
                                 const difference = p.prixActuel - p.prixPrecedent;
-                                const tendance = difference > 0 ? "augmenté" : difference < 0 ? "diminué" : "resté stable";
+                                const tendance = difference > 0 ? "à augmenté" : difference < 0 ? "à diminué" : "est resté stable";
                                 const valeurAbs = Math.abs(difference).toFixed(0).toLocaleString();
 
                                 return (
                                     <li key={i}>
-                                        Dans le <b>{p.marche}</b>,
+                                        <b>{p.marche}</b>,
                                         {p.nbrCollecteActuel && p.nbrCollecteActuel > 1
-                                            ? <> sur une collecte dans <b>{p.nbrCollecteActuel}</b> marchés, </>
+                                            ? <> avec <b>{p.nbrCollecteActuel}</b> fiches, </>
                                             : " "}
-                                        le produit <b>{produit}</b> a vu son prix {tendance}
+                                        le prix de <b>{produit}</b>  {tendance}
                                         {difference !== 0 && <> de <b>{valeurAbs} FCFA</b></>}
-                                        par rapport à la dernière collecte du{" "}
+                                         {" "} depuis la date du  {" "}
                                         <b>{formatDateToDDMMYYYY(p.datePrecedente)}</b>.
                                     </li>
                                 );

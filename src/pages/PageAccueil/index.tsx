@@ -1,15 +1,16 @@
 import React from "react";
 import { Stack, Typography, Box } from "@mui/joy";
-import { IMAGES, PARTENAIRE_IMAMGE } from "../../constant";
 import { CardMedia } from "@mui/material";
 import ChargeurDePage from "./ChargeurDePage";
 import Marquee from "react-fast-marquee";
+import { IMAGES ,PARTENAIRE_IMAMGE } from "../../constant";
+
 
 const PageAccueil: React.FC = () => {
     return (
         <Stack
             sx={{
-                gap: 4,
+                gap: 2,
                 alignItems: "center",
                 justifyContent: "center",
                 textAlign: "center",
@@ -17,14 +18,14 @@ const PageAccueil: React.FC = () => {
             height="100vh"
         >
             <ChargeurDePage />
-
-            <Stack direction="row" gap={'7vw'} justifyContent="center" alignContent={'center'} flexWrap="wrap">
+             <Stack direction="row" gap={'7vw'} justifyContent="center" alignContent={'center'} flexWrap="wrap">
                 <CardMedia
                     component="img"
                     src={IMAGES.logo} // Remplacer par le chemin réel de ton logo
                     alt="Logo SIMRO Cameroun"
                     sx={{ width: '10vw', height: "auto", objectFit: 'contain' }}
                 />
+                
                 <CardMedia
                     component="img"
                     src={IMAGES.logo_padfa} // Remplacer par le chemin réel de ton logo
@@ -32,14 +33,6 @@ const PageAccueil: React.FC = () => {
                     sx={{ width: '10vw', height: "auto", objectFit: 'contain' }}
                 />
             </Stack>
-
-            <Typography level="h2" fontSize="3vw" fontWeight="lg">
-                SIMRO Cameroun
-            </Typography>
-            <Typography level="h4" fontSize="2.5vw" fontWeight="md">
-                Système d'Information sur les Marchés du Riz et de l'Oignon du Cameroun
-            </Typography>
-
             {/* Liste des partenaires */}
             <Box sx={{ mt: 5 }}>
                 <Typography level="h4" fontSize="2vw" fontWeight="md" mb={2}>
@@ -62,8 +55,22 @@ const PageAccueil: React.FC = () => {
                 </Marquee>
 
             </Box>
+
+           
+
+
+            {/* <Typography level="h2" fontSize="3vw" fontWeight="lg">
+
+            </Typography> */}
+            <Typography level="h4" fontSize="2.5vw" fontWeight="md">
+                Système d'Information sur les Marchés du Riz et de l'Oignon du Cameroun (SIMRO Cameroun)
+            </Typography>
+
+            
         </Stack>
     );
 };
+// console.log("IMAGES:", IMAGES);
+// console.log("why:", IMAGES.logo);
 
 export default PageAccueil;

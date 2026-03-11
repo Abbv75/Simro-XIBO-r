@@ -65,8 +65,8 @@ const PageLooper = () => {
             nextPage
         }}>
             {/* Decorations */}
-            <Box sx={{ position: "fixed", top: '-14vw', right: '-8vw', width: '25vw', height: '25vw', borderRadius: "50%", background: "linear-gradient(135deg, #4caf50, #ff9800)", zIndex: -1 }} />
-            <Box sx={{ position: "fixed", bottom: '-16vw', left: '1vw', width: '25vw', height: '25vw', borderRadius: '50%', background: "linear-gradient(45deg, #0e160cff, #06aa0eff)", zIndex: -1 }} />
+            <Box sx={{ position: "fixed", top: '-14vw', right: '-8vw', width: '20vw', height: '20vw', borderRadius: "50%", background: "linear-gradient(135deg, #4caf50, #ff9800)", zIndex: -1 }} />
+            <Box sx={{ position: "fixed", bottom: '-16vw', left: '1vw', width: '20vw', height: '20vw', borderRadius: '50%', background: "linear-gradient(45deg, #0e160cff, #06aa0eff)", zIndex: -1 }} />
 
             {/* Timer + page info */}
             <Sheet

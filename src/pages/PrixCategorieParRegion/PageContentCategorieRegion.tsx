@@ -42,7 +42,7 @@ const PageContentCategorieRegion: React.FC<PageContentCategorieRegionProps> = ({
     // Construire une ligne spéciale pour les images
     const imageRow = Object.fromEntries(
         columns.map((col) => {
-            if (col === "marche" || col === "date") {
+            if (col === "marche" || col === "date" ) {
                 return [col, ""]; // pas d'image ici
             }
             const codeProduit = apiData.find((p) => p.produit === col)?.codeProduit;
@@ -60,15 +60,17 @@ const PageContentCategorieRegion: React.FC<PageContentCategorieRegionProps> = ({
         })
     );
 
-    // Lignes du tableau (on insère d'abord la ligne des images)
+    // Lignes du tableau 
     const tableRows = [
-        { ...imageRow, marche: " ", date: " " }, // ligne images
-        ...data.map((row: any) =>
+       
+        ...data
+        .filter (row => row.marche && row.marche !== "") 
+        .map((row: any) =>
             Object.fromEntries(
                 columns.map((col) => [
                     col,
                     col === "marche" ? (
-                        row[col]
+                        row[col] || " -" // Affiche le nom du marché ou "-" si vide
                     ) : (
                         <b>
                             {col === "date"
@@ -85,11 +87,12 @@ const PageContentCategorieRegion: React.FC<PageContentCategorieRegionProps> = ({
                 ])
             )
         ),
+         { ...imageRow, marche: " ", date: " " }, // ligne images
     ];
 
 
     return (
-        <Stack sx={{ gap: 3, p: 3 }}>
+        <Stack sx={{ gap: 3, p: 4 }}>
             <Typography
                 level="h4"
                 fontSize={"2vw"}
