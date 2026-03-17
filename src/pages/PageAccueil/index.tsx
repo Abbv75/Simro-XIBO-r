@@ -28,7 +28,7 @@ const PageAccueil: React.FC = () => {
                 
                 <CardMedia
                     component="img"
-                    src={IMAGES.logo_padfa} // Remplacer par le chemin réel de ton logo
+                    src={IMAGES.logo_fida} // Remplacer par le chemin réel de ton logo
                     alt="Logo SIMRO Cameroun"
                     sx={{ width: '10vw', height: "auto", objectFit: 'contain' }}
                 />

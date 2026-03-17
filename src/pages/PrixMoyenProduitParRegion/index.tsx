@@ -16,8 +16,8 @@ import getPrixMoyenProduitParRegion from "../../utils/getPrixMoyenProduitParRegi
 import { green, grey } from "@mui/material/colors";
 import { CardMedia } from "@mui/material";
 import getProduitImageUrl from "../../utils/getProduitImageUrl";
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,ChartDataLabels);
 
 interface ProduitMoyenne {
     region: string;
@@ -101,9 +101,9 @@ const PrixMoyenProduitParRegion: React.FC<{ produit: string }> = ({ produit }) =
                         ]}
                         data={moyennes.map((m) => ({
                             region: m.region,
-                            moyenne: <><b>{m.moyenne.toFixed(2)}</b> FCFA</>,
-                            minimum: <><b>{m.min.toFixed(2)}</b> FCFA</>,
-                            maximum: <><b>{m.max.toFixed(2)}</b> FCFA</>,
+                            moyenne: <><b>{m.moyenne.toFixed(0)}</b> FCFA</>,
+                            minimum: <><b>{m.min.toFixed(0)}</b> FCFA</>,
+                            maximum: <><b>{m.max.toFixed(0)}</b> FCFA</>,
                             nbMarches: <b>{m.nbMarches}</b>,
                         }))}
                     />
@@ -173,26 +173,37 @@ const PrixMoyenProduitParRegion: React.FC<{ produit: string }> = ({ produit }) =
                     </Stack>
                 </Grid>
 
-                <Grid xs={12} md={5}>
-                    <Bar
-                        data={{
-                            labels: moyennes.map((m) => m.region),
-                            datasets: [
-                                {
-                                    label: `Prix moyen de ${produit}`,
-                                    data: moyennes.map((m) => m.moyenne),
-                                    backgroundColor: "rgba(54, 162, 235, 0.6)",
-
-                                },
-                            ],
-                        }}
-                        options={{
-                            responsive: true,
-                            plugins: { legend: { display: false } },
-                            scales: { y: { beginAtZero: true } },
-                        }}
-                    />
-                </Grid>
+<Grid xs={12} md={5} mt={2}>
+  <Bar
+    data={{
+      labels: moyennes.map((m) => m.region),
+      datasets: [
+        {
+          label: `Prix moyen de ${produit}`,
+          data: moyennes.map((m) => m.moyenne),
+          backgroundColor: "rgba(54, 162, 235, 0.6)",
+        },
+      ],
+    }}
+    options={{
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: "end",
+          align: "top",
+          formatter: (value) => value.toFixed(0),
+          font: {
+            weight: 800,
+          },
+        },
+      },
+      scales: {
+        y: { beginAtZero: true },
+      },
+    }}
+  />
+</Grid>
 
             </Grid>
         </Stack>
