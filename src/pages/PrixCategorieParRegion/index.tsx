@@ -48,7 +48,9 @@ const PrixCategorieParRegion: React.FC = memo(() => {
 
                 // Créer une page pour chaque région
                 Array.from(regionMap.entries()).forEach(([region, marcheMap]) => {
-                    const allProduits = Array.from(new Set(catData.map((p) => p.produit)));
+                    // Ne garder que les produits ayant réellement un prix dans cette région
+                    const regionData = catData.filter((p) => p.region === region);
+                    const allProduits = Array.from(new Set(regionData.map((p) => p.produit)));
                     const tableRows = Array.from(marcheMap.entries()).map(([marche, info]) => {
                         const row: any = { marche, date: info.date };
                         allProduits.forEach((prod) => {

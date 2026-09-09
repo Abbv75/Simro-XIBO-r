@@ -44,13 +44,15 @@ const PageLooper = () => {
 
 
     useEffect(() => {
-        getAllValidation().then(data => data && setapiData(data))
+        getAllValidation().then((data) => {
+            setapiData(Array.isArray(data) ? data : []);
+        });
     }, []);
 
-    if (!apiData.length) {
+    if (!Array.isArray(apiData) || apiData.length === 0) {
         return (
             <LinearProgress />
-        )
+        );
     }
 
     return (
